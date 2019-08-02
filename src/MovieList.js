@@ -3,14 +3,15 @@ import Movie from './Movie';
 import { MovieContext } from './MovieContext';
 
 const MovieList = () => {
-   const [movies, setMovies] = useContext(MovieContext);
+   const [posts, setPost] = useContext(MovieContext);
+   console.log('desde list: ', posts);
     return (
-        <div>
-            {movies.map(movie => (
+        <div className="container my-5">
+            {posts.map(post => (
                 <Movie 
-                    key={movie.id}
-                    name={movie.name}
-                    price={movie.price}
+                    key={post.id}
+                    name={post.title.rendered}
+                    price={post.date}
                 />
             ))}
         </div>

@@ -18,7 +18,8 @@ const AddMovie = () => {
     }
 
     return(
-        <form onSubmit={addMovie}>
+        <div className="container my-5">
+            <form onSubmit={addMovie}>
             <input 
                 type="text" 
                 name="name" 
@@ -33,6 +34,8 @@ const AddMovie = () => {
             />
             <button>Submit</button>
         </form>
+        </div>
+    
     );
 };
 

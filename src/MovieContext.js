@@ -1,27 +1,28 @@
-import React, { useState, createContext } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 
 export const MovieContext = createContext();
 
 export const MovieProvider = (props) => {
-    const [movies, setMovies] = useState([
-        {
-            name: 'Jumanji',
-            price: '$12',
-            id: 123
-        },
-        {
-            name: 'Estar Guors',
-            price: '$13',
-            id: 234
-        },
-        {
-            name: 'Pinocho',
-            price: '$15',
-            id: 345
-        }
-    ]);
+
+    const [posts, setPost] = useState([]);
+    const vacio = [''];
+
+    //Llamo a la funcion abajo asi no uso useEffect
+    useEffect(() => {
+        getDatitos();
+      },[]);
+
+    const getDatitos = async () => {
+        const response = await fetch(`http://tucodigital.com/wp-json/wp/v2/posts?search=${vacio}`);
+        const data = await response.json();
+        console.log('desde context: ', data);
+        return setPost(data);
+    }
+
+    //getDatitos();
+
     return(
-        <MovieContext.Provider value={[movies, setMovies]}>
+        <MovieContext.Provider value={[posts, setPost]}>
             {props.children}
         </MovieContext.Provider>
     );
